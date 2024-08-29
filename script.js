@@ -34,29 +34,105 @@ const tetrominoes = {
         [
             [1,1,1,1]
         ]
+    ],
+    L: [
+    
+        [
+            [0,1,0],
+            [0,1,0],
+            [0,1,1],
+        ],
+        [
+            [0,0,0],
+            [1,1,1],
+            [1,0,0],
+        ],
+        [
+            [1,1,0],
+            [0,1,0],
+            [0,1,0],
+            
+        ],
+        [
+            [0,0,1],
+            [1,1,1],
+            [0,0,0],
+        ]
+    ],
+    T:[
+        [
+            [1,1,1],
+            [0,1,0]
+        ],
+        [
+            [0,1,0],
+            [1,1,0],
+            [0,1,0]
+        ],
+        [
+            [0,1,0],
+            [1,1,1],
+            [0,0,0]
+           
+        ],
+        [
+            [0,1,0],
+            [0,1,1],
+            [0,1,0]
+        ]
+    ],
+    square:[
+        [
+            [1,1],
+            [1,1]
+        ]
+    ],
+    skew:[
+        [
+            [0,1,1],
+            [1,1,0]
+        ],
+        [
+            [1,0],
+            [1,1],
+            [0,1]
+        ],
+        [
+            [0,1,1],
+            [1,1,0]
+        ],
+        [
+            [1,0],
+            [1,1],
+            [0,1]
+        ]
     ]
-    // L: [
-    //     //contain 4 shapes tetromino
-    //     [],
-    //     [],
-    //     [],
-    //     []
-    // ]
 }
 function placeTetromino(tetromino,x,y) {
     //x,y are coordinate number
 
    for (let i = 0; i < tetromino.length; i++) {
     for (let j = 0; j < tetromino[i].length; j++) {
+        if (tetromino[i][j]!=0)
         grid[y+i][x+j]=tetromino[i][j]
         
     }
     
    }
-   drawGrid()
+    drawGrid()
+   
 
     
  }
+let y = 0;
+ function moveTetrominoDown() {
+    
+    
+    console.log(y+=1)
+    
+    placeTetromino(tetrominoes.L[0],4,y)
+ }
+   
+setInterval(moveTetrominoDown,2000)
 
- placeTetromino(tetrominoes.I[1],3,0)  
  

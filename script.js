@@ -124,11 +124,27 @@ function placeTetromino(tetromino,x,y) {
 
     
  }
+function clearTetromino() {
+    for (let i = 0; i < grid.length; i++) {
+        for (let j = 0; j < grid[i].length; j++) {
+            
+            grid[i][j]=0
+            
+        }
+        
+       }
+        drawGrid()
+    
+
+
+    
+}
 let y = 0;
  function moveTetrominoDown() {
     
     
     console.log(y+=1)
+    clearTetromino();
     
     placeTetromino(tetrominoes.L[0],4,y)
  }

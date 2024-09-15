@@ -38,25 +38,25 @@ const tetrominoes = {
     L: [
     
         [
-            [0,1,0],
-            [0,1,0],
-            [0,1,1],
+            [1,0],
+            [1,0],
+            [1,1],
         ],
         [
-            [0,0,0],
+           
             [1,1,1],
             [1,0,0],
         ],
         [
-            [1,1,0],
-            [0,1,0],
-            [0,1,0],
+            [1,1],
+            [0,1],
+            [0,1],
             
         ],
         [
             [0,0,1],
             [1,1,1],
-            [0,0,0],
+         
         ]
     ],
     T:[
@@ -72,13 +72,13 @@ const tetrominoes = {
         [
             [0,1,0],
             [1,1,1],
-            [0,0,0]
+          
            
         ],
         [
-            [0,1,0],
-            [0,1,1],
-            [0,1,0]
+            [1,0],
+            [1,1],
+            [1,0]
         ]
     ],
     square:[
@@ -133,22 +133,44 @@ function clearTetromino() {
         }
         
        }
-        drawGrid()
+       
     
 
 
     
 }
+function checkCollision(tetromino,x,y) {
+    for (let i = 0; i<tetromino.length;i++ ){
+        for(let j= 0; j < tetromino[i].length; j++) {
+            const newX = j + x ;
+            const newY = i + y ;
+            return newX<0 || newX>cols || newY>=rows || newX&&newY==1;
+        }
+    }
+  
+    
+}
+
 let y = 0;
  function moveTetrominoDown() {
+    y+=1;
     
     
-    console.log(y+=1)
     clearTetromino();
+    if (checkCollision) {
+        console.log("gotcha")
+        // freezeTetromino();
+        // checkCompleteRows();
+        // resetTetromino()
+        
+    } else {
+
+        
+        placeTetromino(tetrominoes.L[1],x,y)
+    }
     
-    placeTetromino(tetrominoes.L[0],4,y)
  }
    
-setInterval(moveTetrominoDown,2000)
+setInterval(moveTetrominoDown,2000
 
  

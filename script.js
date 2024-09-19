@@ -113,8 +113,8 @@ function placeTetromino(tetromino,x,y) {
 
    for (let i = 0; i < tetromino.length; i++) {
     for (let j = 0; j < tetromino[i].length; j++) {
-        if (tetromino[i][j]!=0)
-        grid[y+i][x+j]=tetromino[i][j]
+        if (tetromino[i][j]!=0){
+        grid[y+i][x+j]=tetromino[i][j]}
         
     }
     
@@ -142,23 +142,41 @@ function clearTetromino() {
 function checkCollision(tetromino,x,y) {
     for (let i = 0; i<tetromino.length;i++ ){
         for(let j= 0; j < tetromino[i].length; j++) {
+            
             const newX = j + x ;
             const newY = i + y ;
-            return newX<0 || newX>cols || newY>=rows || newX&&newY==1;
+            // console.log(newX)
+            console.log(grid[newY][newX])
+            // console.log(newY)
+            // const value= grid[newY][newx]
+            // console.log(value)
+            if(newX<0 || newX>=cols || newY>=rows || grid[newY][newX]=== 1){
+                // console.log(true)
+                return true
+                
+
+            }else{
+            
+            } 
         }
     }
   
     
 }
-
+grid[6][3]=1
+grid[7][4]=1
+grid[5][5]=1
+grid[6][6]=1
 let y = 0;
  function moveTetrominoDown() {
+   
     y+=1;
     
+    // clearTetromino();
+    if (checkCollision(tetrominoes.I[1],3,y)===true) {
     
-    clearTetromino();
-    if (checkCollision) {
         console.log("gotcha")
+
         // freezeTetromino();
         // checkCompleteRows();
         // resetTetromino()
@@ -166,11 +184,12 @@ let y = 0;
     } else {
 
         
-        placeTetromino(tetrominoes.L[1],x,y)
+        placeTetromino(tetrominoes.I[1],3,y)
     }
     
  }
-   
-setInterval(moveTetrominoDown,2000
-
  
+   
+setInterval(moveTetrominoDown,2000)
+
+

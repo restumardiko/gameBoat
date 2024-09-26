@@ -124,21 +124,27 @@ function placeTetromino(tetromino,x,y) {
 
     
  }
-function clearTetromino() {
-    for (let i = 0; i < grid.length; i++) {
-        for (let j = 0; j < grid[i].length; j++) {
-            
-            grid[i][j]=0
-            
-        }
+function clearTetromino(tetromino,x,y) {
+//only CLEAR PREVIOUS TETROMINO no more
+
+for (let i = 0; i < tetromino.length; i++) {
+    for (let j = 0; j < tetromino[i].length; j++) {
         
-       }
-       
+        grid[y-1+i][x+j]=0;
+        console.log(grid[y+i][x+j])
+        
     
-
-
     
+   }
+    drawGrid()
+    console.log("fitrotul kamila")
 }
+}
+       
+
+
+    
+
 function checkCollision(tetromino,x,y) {
     for (let i = 0; i<tetromino.length;i++ ){
         for(let j= 0; j < tetromino[i].length; j++) {
@@ -146,7 +152,7 @@ function checkCollision(tetromino,x,y) {
             const newX = j + x ;
             const newY = i + y ;
             // console.log(newX)
-            console.log(grid[newY][newX])
+           // console.log(grid[newY][newX])
             // console.log(newY)
             // const value= grid[newY][newx]
             // console.log(value)
@@ -163,17 +169,18 @@ function checkCollision(tetromino,x,y) {
   
     
 }
-grid[6][3]=1
-grid[7][4]=1
-grid[5][5]=1
-grid[6][6]=1
+// grid[6][3]=1
+// grid[7][4]=1
+// grid[5][5]=1
+// grid[6][6]=1
 let y = 0;
  function moveTetrominoDown() {
    
     y+=1;
     
-    // clearTetromino();
+    clearTetromino(tetrominoes.I[1],3,y);
     if (checkCollision(tetrominoes.I[1],3,y)===true) {
+       
     
         console.log("gotcha")
 

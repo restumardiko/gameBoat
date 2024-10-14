@@ -108,6 +108,10 @@ const tetrominoes = {
         ]
     ]
 }
+
+
+//const indexNumberOnTetrominoShape =Math.floor(Math.random()*tetrominoes.length)
+let currentTetromino = tetrominoes.L[0]
 function placeTetromino(tetromino,x,y) {
     //x,y are coordinate number
 
@@ -131,18 +135,35 @@ for (let i = 0; i < tetromino.length; i++) {
     for (let j = 0; j < tetromino[i].length; j++) {
         
         grid[y-1+i][x+j]=0;
-        console.log(grid[y+i][x+j])
+        
         
     
     
    }
     drawGrid()
-    console.log("fitrotul kamila")
+   
 }
 }
        
+function newTetromino(){
 
+    console.log("hi")
+const howManyTetrominoes=Object.keys(tetrominoes)
+const tetrominoKeys=Math.floor(Math.random()*howManyTetrominoes.length)  //contain random value from 0 to how many tetrominos i have ....
+const tetrominoShape = howManyTetrominoes[tetrominoKeys]
+const setTet = tetrominoes[tetrominoShape][0]
+currentTetromino=setTet;
 
+}
+function freezeTetromino() {
+    placeTetromino(currentTetromino,3,y-1)
+    y=0;
+    
+console.log('gotcha');
+ // checkCompleteRows();
+ newTetromino();
+    
+}
     
 
 function checkCollision(tetromino,x,y) {
@@ -156,7 +177,7 @@ function checkCollision(tetromino,x,y) {
             // console.log(newY)
             // const value= grid[newY][newx]
             // console.log(value)
-            if(newX<0 || newX>=cols || newY>=rows || grid[newY][newX]=== 1){
+            if(newX<0 || newX>=cols || newY==rows || grid[newY][newX]=== 1){
                 // console.log(true)
                 return true
                 
@@ -169,34 +190,33 @@ function checkCollision(tetromino,x,y) {
   
     
 }
-// grid[6][3]=1
-// grid[7][4]=1
-// grid[5][5]=1
-// grid[6][6]=1
+
+
 let y = 0;
  function moveTetrominoDown() {
    
     y+=1;
     
-    clearTetromino(tetrominoes.I[1],3,y);
-    if (checkCollision(tetrominoes.I[1],3,y)===true) {
+    clearTetromino(currentTetromino,3,y);
+    if (checkCollision(currentTetromino,3,y)===true) {
        
     
-        console.log("gotcha")
+       
 
-        // freezeTetromino();
-        // checkCompleteRows();
-        // resetTetromino()
+        freezeTetromino();
+        
+       
         
     } else {
+        
 
         
-        placeTetromino(tetrominoes.I[1],3,y)
+        placeTetromino(currentTetromino,3,y)
     }
     
  }
  
    
-setInterval(moveTetrominoDown,2000)
+setInterval(moveTetrominoDown,2000);
 
 

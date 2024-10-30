@@ -164,6 +164,45 @@ console.log('gotcha');
  newTetromino();
     
 }
+//this will make tetromino move right left and down
+function moveDown(params) {
+    console.log("down")
+
+}
+function moveLeft(params) {
+
+    console.log("left")
+    
+}
+function moveRight(params) {
+    console.log(" right")
+    
+}
+function rotation(params) {
+    console.log ("rotate")
+    
+}
+document.addEventListener("keydown",(e)=>{
+    if (e.key === "ArrowLeft") {
+        
+        moveLeft()
+        
+    }
+    else if (e.key === "ArrowRight") {
+
+        moveRight()
+        
+    } 
+    else if (e.key === "ArrowDown"){
+        moveDown()
+    }
+    else if ( e.key === "ArrowUp"){
+
+        rotation()    }
+
+
+})
+
     
 
 function checkCollision(tetromino,x,y) {

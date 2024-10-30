@@ -156,7 +156,7 @@ currentTetromino=setTet;
 
 }
 function freezeTetromino() {
-    placeTetromino(currentTetromino,3,y-1)
+    placeTetromino(currentTetromino,x,y-1)
     y=0;
     
 console.log('gotcha');
@@ -167,36 +167,46 @@ console.log('gotcha');
 //this will make tetromino move right left and down
 function moveDown(params) {
     console.log("down")
+    placeTetromino(currentTetromino,x,y+=1)
+    
+
 
 }
 function moveLeft(params) {
 
     console.log("left")
+    placeTetromino(currentTetromino,x-=1,y)
     
 }
 function moveRight(params) {
     console.log(" right")
+    placeTetromino(currentTetromino,x+=1,y)
     
 }
 function rotation(params) {
+    
     console.log ("rotate")
     
 }
 document.addEventListener("keydown",(e)=>{
     if (e.key === "ArrowLeft") {
+        clearTetromino(currentTetromino,x,y+1);
         
         moveLeft()
         
     }
     else if (e.key === "ArrowRight") {
 
+        clearTetromino(currentTetromino,x,y+1);
         moveRight()
         
     } 
     else if (e.key === "ArrowDown"){
+        clearTetromino(currentTetromino,x,y);
         moveDown()
     }
     else if ( e.key === "ArrowUp"){
+        clearTetromino(currentTetromino,x,y);
 
         rotation()    }
 
@@ -230,14 +240,14 @@ function checkCollision(tetromino,x,y) {
     
 }
 
-
+let x= 3;
 let y = 0;
  function moveTetrominoDown() {
    
     y+=1;
     
-    clearTetromino(currentTetromino,3,y);
-    if (checkCollision(currentTetromino,3,y)===true) {
+    clearTetromino(currentTetromino,x,y);
+    if (checkCollision(currentTetromino,x,y)===true) {
        
     
        
@@ -250,7 +260,7 @@ let y = 0;
         
 
         
-        placeTetromino(currentTetromino,3,y)
+        placeTetromino(currentTetromino,x,y)
     }
     
  }

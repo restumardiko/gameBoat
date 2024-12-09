@@ -65,9 +65,9 @@ const tetrominoes = {
             [0,1,0]
         ],
         [
-            [0,1,0],
-            [1,1,0],
-            [0,1,0]
+            [0,1],
+            [1,1],
+            [0,1]
         ],
         [
             [0,1,0],
@@ -155,9 +155,9 @@ const setTet = tetrominoes[tetrominoShape][0]
 currentTetromino=setTet;
 
 }
-function freezeTetromino() {
-    placeTetromino(currentTetromino,x,y-1)
-    y=0;
+function freezeTetromino(x,y) {
+    placeTetromino(currentTetromino,x,y)
+  
     
 console.log('gotcha');
  // checkCompleteRows();
@@ -165,20 +165,23 @@ console.log('gotcha');
     
 }
 //this will make tetromino move right left and down
+//the function work by implement moveTetrominoDown's function 
 function moveDown(params) {
-    console.log("down")
-    placeTetromino(currentTetromino,x,y+=1)
+    moveTetrominoDown()
+}
     
 
 
-}
+
 function moveLeft(params) {
+    clearTetromino(currentTetromino,x,y+1);
 
     console.log("left")
     placeTetromino(currentTetromino,x-=1,y)
     
 }
 function moveRight(params) {
+    clearTetromino(currentTetromino,x,y+1);
     console.log(" right")
     placeTetromino(currentTetromino,x+=1,y)
     
@@ -190,19 +193,17 @@ function rotation(params) {
 }
 document.addEventListener("keydown",(e)=>{
     if (e.key === "ArrowLeft") {
-        clearTetromino(currentTetromino,x,y+1);
+        
         
         moveLeft()
         
     }
     else if (e.key === "ArrowRight") {
 
-        clearTetromino(currentTetromino,x,y+1);
         moveRight()
         
     } 
     else if (e.key === "ArrowDown"){
-        clearTetromino(currentTetromino,x,y);
         moveDown()
     }
     else if ( e.key === "ArrowUp"){
@@ -252,7 +253,8 @@ let y = 0;
     
        
 
-        freezeTetromino();
+        freezeTetromino(x,y-1);
+        y=0;
         
        
         
@@ -266,6 +268,6 @@ let y = 0;
  }
  
    
-setInterval(moveTetrominoDown,2000);
+setInterval(moveTetrominoDown,1000);
 
 

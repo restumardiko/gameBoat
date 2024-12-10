@@ -184,7 +184,7 @@ function moveLeft(params) {
     if(checkCollision(currentTetromino,x-1,y)==true){
         
         
-        console.log("kamila")
+        
     }else{
         console.log("left")
         placeTetromino(currentTetromino,x-=1,y)
@@ -194,9 +194,15 @@ function moveLeft(params) {
     
 }
 function moveRight(params) {
+    
     clearTetromino(currentTetromino,x,y+1);
+    if(checkCollision(currentTetromino,x+1,y)==true){
+
+    }else{
+    
     console.log(" right")
     placeTetromino(currentTetromino,x+=1,y)
+}
     
 }
 function rotation(params) {

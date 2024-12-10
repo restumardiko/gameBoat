@@ -114,6 +114,8 @@ const tetrominoes = {
 let currentTetromino = tetrominoes.L[0]
 function placeTetromino(tetromino,x,y) {
     //x,y are coordinate number
+    console.log(x,y)
+    
 
    for (let i = 0; i < tetromino.length; i++) {
     for (let j = 0; j < tetromino[i].length; j++) {
@@ -130,6 +132,7 @@ function placeTetromino(tetromino,x,y) {
  }
 function clearTetromino(tetromino,x,y) {
 //only CLEAR PREVIOUS TETROMINO no more
+console.log("clear function called")
 
 for (let i = 0; i < tetromino.length; i++) {
     for (let j = 0; j < tetromino[i].length; j++) {
@@ -140,14 +143,14 @@ for (let i = 0; i < tetromino.length; i++) {
     
     
    }
-    drawGrid()
+  //  drawGrid()
    
 }
 }
        
 function newTetromino(){
 
-    console.log("hi")
+    console.log("new tetromino called")
 const howManyTetrominoes=Object.keys(tetrominoes)
 const tetrominoKeys=Math.floor(Math.random()*howManyTetrominoes.length)  //contain random value from 0 to how many tetrominos i have ....
 const tetrominoShape = howManyTetrominoes[tetrominoKeys]
@@ -159,7 +162,7 @@ function freezeTetromino(x,y) {
     placeTetromino(currentTetromino,x,y)
   
     
-console.log('gotcha');
+console.log('freze function called');
  // checkCompleteRows();
  newTetromino();
     
@@ -174,10 +177,20 @@ function moveDown(params) {
 
 
 function moveLeft(params) {
+   
+   
+    
     clearTetromino(currentTetromino,x,y+1);
+    if(checkCollision(currentTetromino,x-1,y)==true){
+        
+        
+        console.log("kamila")
+    }else{
+        console.log("left")
+        placeTetromino(currentTetromino,x-=1,y)
+    }
 
-    console.log("left")
-    placeTetromino(currentTetromino,x-=1,y)
+    
     
 }
 function moveRight(params) {
@@ -222,13 +235,13 @@ function checkCollision(tetromino,x,y) {
             
             const newX = j + x ;
             const newY = i + y ;
-            // console.log(newX)
-           // console.log(grid[newY][newX])
-            // console.log(newY)
-            // const value= grid[newY][newx]
+           // console.log(newX)
+           
+           //console.log(newY)
+            // const value= grid[newY][newX]
             // console.log(value)
             if(newX<0 || newX>=cols || newY==rows || grid[newY][newX]=== 1){
-                // console.log(true)
+                console.log(true)
                 return true
                 
 
@@ -255,6 +268,7 @@ let y = 0;
 
         freezeTetromino(x,y-1);
         y=0;
+        x=3;
         
        
         

@@ -41,6 +41,7 @@ const tetrominoes = {
             [1,0],
             [1,0],
             [1,1],
+         
         ],
         [
            
@@ -114,13 +115,16 @@ const tetrominoes = {
 let currentTetromino = tetrominoes.L[0]
 function placeTetromino(tetromino,x,y) {
     //x,y are coordinate number
-    console.log(x,y)
+
     
 
    for (let i = 0; i < tetromino.length; i++) {
     for (let j = 0; j < tetromino[i].length; j++) {
-        if (tetromino[i][j]!=0){
+        if (tetromino[i][j]!==0){
         grid[y+i][x+j]=tetromino[i][j]}
+     else if(tetromino[i][j]==0)[
+        grid[y+i][x+j]=grid[y+i][x+j]
+     ]
         
     }
     
@@ -147,13 +151,14 @@ for (let i = 0; i < tetromino.length; i++) {
    
 }
 }
+let tetrominoShape;
        
 function newTetromino(){
 
     console.log("new tetromino called")
 const howManyTetrominoes=Object.keys(tetrominoes)
 const tetrominoKeys=Math.floor(Math.random()*howManyTetrominoes.length)  //contain random value from 0 to how many tetrominos i have ....
-const tetrominoShape = howManyTetrominoes[tetrominoKeys]
+tetrominoShape = howManyTetrominoes[tetrominoKeys]
 const setTet = tetrominoes[tetrominoShape][0]
 currentTetromino=setTet;
 
@@ -197,19 +202,35 @@ function moveRight(params) {
     
     clearTetromino(currentTetromino,x,y+1);
     if(checkCollision(currentTetromino,x+1,y)==true){
-
+        
     }else{
-    
-    console.log(" right")
-    placeTetromino(currentTetromino,x+=1,y)
-}
-    
-}
-function rotation(params) {
-    
-    console.log ("rotate")
+        
+        console.log(" right")
+        placeTetromino(currentTetromino,x+=1,y)
+    }
     
 }
+
+    //work by transpose then reverse the tetromino
+function rotation() {
+    clearTetromino(currentTetromino,x,y+1);
+    function rotateClockwise(matrix) {
+        return matrix[0].map((_, colIndex) => 
+          matrix.map(row => row[colIndex]).reverse()
+        );
+      }
+
+       console.log(currentTetromino)
+       currentTetromino= rotateClockwise(currentTetromino)
+     
+      }
+  
+
+      
+    
+   
+
+ 
 document.addEventListener("keydown",(e)=>{
     if (e.key === "ArrowLeft") {
         
@@ -237,17 +258,21 @@ document.addEventListener("keydown",(e)=>{
 
 function checkCollision(tetromino,x,y) {
     for (let i = 0; i<tetromino.length;i++ ){
+      
         for(let j= 0; j < tetromino[i].length; j++) {
+
             
             const newX = j + x ;
             const newY = i + y ;
-           // console.log(newX)
+            
+           //console.log(newY)
            
            //console.log(newY)
-            // const value= grid[newY][newX]
-            // console.log(value)
-            if(newX<0 || newX>=cols || newY==rows || grid[newY][newX]=== 1){
+        //    console.log(grid[newY][newX])
+           
+            if(newX<0 || newX>=cols || newY==rows || grid[newY][newX]===1 ){
                 console.log(true)
+                
                 return true
                 
 
@@ -268,19 +293,19 @@ let y = 0;
     
     clearTetromino(currentTetromino,x,y);
     if (checkCollision(currentTetromino,x,y)===true) {
-       
-    
-       
-
+        
+        
+        
+        
         freezeTetromino(x,y-1);
         y=0;
         x=3;
         
-       
+        
         
     } else {
         
-
+        
         
         placeTetromino(currentTetromino,x,y)
     }

@@ -272,18 +272,24 @@ function checkCollision(tetromino,x,y) {
            
             if(newX<0 || newX>=cols || newY==rows || grid[newY][newX]===1 ){
                 console.log(true)
+                console.log(newX);
+                console.log(newY);
                 
                 return true
                 
 
-            }else{
+            }
+          
+       
+
             
-            } 
+            
+            
         }
     }
   
-    
 }
+
 
 let x= 3;
 let y = 0;
@@ -292,7 +298,14 @@ let y = 0;
     y+=1;
     
     clearTetromino(currentTetromino,x,y);
-    if (checkCollision(currentTetromino,x,y)===true) {
+     if ( checkCollision(currentTetromino,x,y)===true && y<=1  ){
+        clearInterval(int);
+        alert("game over")
+        
+        console.log("game over")
+        }
+   else if (checkCollision(currentTetromino,x,y)===true) {
+        
         
         
         
@@ -303,7 +316,11 @@ let y = 0;
         
         
         
-    } else {
+    }
+    
+    
+  
+     else {
         
         
         
@@ -313,6 +330,9 @@ let y = 0;
  }
  
    
-setInterval(moveTetrominoDown,1000);
+
+
+ const int = setInterval(moveTetrominoDown,1000);
+ int();
 
 

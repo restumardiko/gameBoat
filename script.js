@@ -224,14 +224,30 @@ function rotation() {
        currentTetromino= rotateClockwise(currentTetromino)
      
       }
-  
-
+//pauseGame
+function pauseGame(){
+    console.log("pause")
+}
+function startGame() {
+    console.log("start")
+}
+//togel function
+function togel(params) {
+    isPaused=!isPaused
+    if(isPaused){
+        startGame()
+    }else{
+        pauseGame()
+    }
+    
+}
       
     
    
 
  
 document.addEventListener("keydown",(e)=>{
+    console.log(e)
     if (e.key === "ArrowLeft") {
         
         
@@ -250,6 +266,17 @@ document.addEventListener("keydown",(e)=>{
         clearTetromino(currentTetromino,x,y);
 
         rotation()    }
+    else if ( e.key === ' '){
+        console.log("pause/start")
+        togel();
+
+     
+    }
+    else if (e.key === 'h'){
+        console.log("start")
+       
+    }
+
 
 
 })
@@ -329,10 +356,12 @@ let y = 0;
     
  }
  
+ let gameInterval = null; 
+let isPaused = false;
    
 
 
- const int = setInterval(moveTetrominoDown,1000);
- int();
+ let int = setInterval(moveTetrominoDown,1000);
+
 
 

@@ -1,3 +1,6 @@
+window.addEventListener("load",(event)=>{
+    startGame()
+})
 const canvas = document.getElementById('canvas');
 const ctx =  canvas.getContext('2d');
 const rows = 20;
@@ -227,17 +230,23 @@ function rotation() {
 //pauseGame
 function pauseGame(){
     console.log("pause")
+    if (gameInterval) {
+        clearInterval(gameInterval); // Stops the interval
+        gameInterval = null;
+      }
+
 }
 function startGame() {
     console.log("start")
+   gameInterval= setInterval(moveTetrominoDown,1000);
 }
 //togel function
 function togel(params) {
     isPaused=!isPaused
     if(isPaused){
-        startGame()
-    }else{
         pauseGame()
+    }else{
+        startGame()
     }
     
 }
@@ -326,7 +335,7 @@ let y = 0;
     
     clearTetromino(currentTetromino,x,y);
      if ( checkCollision(currentTetromino,x,y)===true && y<=1  ){
-        clearInterval(int);
+
         alert("game over")
         
         console.log("game over")
@@ -361,7 +370,7 @@ let isPaused = false;
    
 
 
- let int = setInterval(moveTetrominoDown,1000);
+
 
 
 

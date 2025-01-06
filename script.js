@@ -155,6 +155,23 @@ for (let i = 0; i < tetromino.length; i++) {
 }
 }
 let tetrominoShape;
+
+//check complete
+function checkCompleteRows(){
+    const target = [1,1,1,1,1,1,1,1,1,1]
+    const x = grid.findIndex(arr => 
+        arr.length === target.length && arr.every((val, index) => val === target[index])
+      );
+      if (x!=-1){
+        console.log(x)
+        grid.splice(x,1)
+        grid.unshift([0,0,0,0,0,0,0,0,0,0])
+
+      }else {
+        return
+      }
+   
+}
        
 function newTetromino(){
 
@@ -163,7 +180,8 @@ const howManyTetrominoes=Object.keys(tetrominoes)
 const tetrominoKeys=Math.floor(Math.random()*howManyTetrominoes.length)  //contain random value from 0 to how many tetrominos i have ....
 tetrominoShape = howManyTetrominoes[tetrominoKeys]
 const setTet = tetrominoes[tetrominoShape][0]
-currentTetromino=setTet;
+currentTetromino = setTet;
+// currentTetromino=tetrominoes.I[0]
 
 }
 function freezeTetromino(x,y) {
@@ -171,7 +189,7 @@ function freezeTetromino(x,y) {
   
     
 console.log('freze function called');
- // checkCompleteRows();
+ checkCompleteRows();
  newTetromino();
     
 }
@@ -361,6 +379,7 @@ let y = 0;
         
         
         placeTetromino(currentTetromino,x,y)
+    
     }
     
  }

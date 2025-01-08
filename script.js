@@ -158,18 +158,34 @@ let tetrominoShape;
 
 //check complete
 function checkCompleteRows(){
-    const target = [1,1,1,1,1,1,1,1,1,1]
-    const x = grid.findIndex(arr => 
-        arr.length === target.length && arr.every((val, index) => val === target[index])
-      );
-      if (x!=-1){
-        console.log(x)
-        grid.splice(x,1)
-        grid.unshift([0,0,0,0,0,0,0,0,0,0])
+   
+        
+    for (let i = grid.length-1;i>=0;i--){
+        if (JSON.stringify(grid[i])===JSON.stringify([1,1,1,1,1,1,1,1,1,1])){
+            console.log(i)
+            grid.splice(i,1)
+            grid.unshift([0,0,0,0,0,0,0,0,0,0])
+            i++
 
-      }else {
-        return
-      }
+        }else {
+            console.log(i,"tidak dihapus")
+            
+        }
+    }
+    
+
+    // const target = [1,1,1,1,1,1,1,1,1,1]
+    // const x = grid.findIndex(arr => 
+    //     arr.length === target.length && arr.every((val, index) => val === target[index])
+    //   );
+    //   if (x!=-1){
+    //     console.log(x)
+    //     grid.splice(x,1)
+    //     grid.unshift([0,0,0,0,0,0,0,0,0,0])
+
+    //   }else {
+    //     return
+    //   }
    
 }
        
@@ -181,7 +197,7 @@ const tetrominoKeys=Math.floor(Math.random()*howManyTetrominoes.length)  //conta
 tetrominoShape = howManyTetrominoes[tetrominoKeys]
 const setTet = tetrominoes[tetrominoShape][0]
 currentTetromino = setTet;
-// currentTetromino=tetrominoes.I[0]
+currentTetromino=tetrominoes.I[0]
 
 }
 function freezeTetromino(x,y) {

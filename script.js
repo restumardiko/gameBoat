@@ -116,35 +116,36 @@ const tetrominoes = {
 
 //const indexNumberOnTetrominoShape =Math.floor(Math.random()*tetrominoes.length)
 let currentTetromino = tetrominoes.L[0]
-function placeTetromino(tetromino,x,y) {
-    //x,y are coordinate number
+function placeTetromino(tetromino, x, y) {
+    for (let i = 0; i < tetromino.length; i++) {
+        for (let j = 0; j < tetromino[i].length; j++) {
+            // Abaikan sel dengan nilai 0
+            if (tetromino[i][j] === 0) continue;
 
-    
+            // Pastikan tetromino tidak menimpa nilai di grid yang sudah terisi
+            const gridX = x + j;
+            const gridY = y + i;
 
-   for (let i = 0; i < tetromino.length; i++) {
-    for (let j = 0; j < tetromino[i].length; j++) {
-        if (tetromino[i][j]!==0){
-        grid[y+i][x+j]=tetromino[i][j]}
-     else if(tetromino[i][j]==0)[
-        grid[y+i][x+j]=grid[y+i][x+j]
-     ]
-        
+            if (gridY >= 0 && gridX >= 0 && gridX < cols && gridY < rows) {
+                grid[gridY][gridX] = tetromino[i][j];
+            }
+        }
     }
-    
-   }
-    drawGrid()
-   
+    drawGrid(); // Opsional: menggambar ulang grid
+}
 
-    
- }
+
 function clearTetromino(tetromino,x,y) {
 //only CLEAR PREVIOUS TETROMINO no more
-console.log("clear function called")
+// console.log("clear function called")
 
 for (let i = 0; i < tetromino.length; i++) {
     for (let j = 0; j < tetromino[i].length; j++) {
         
+        if(tetromino[i][j]!==0){
         grid[y-1+i][x+j]=0;
+        }
+      
         
         
     
@@ -162,42 +163,30 @@ function checkCompleteRows(){
         
     for (let i = grid.length-1;i>=0;i--){
         if (JSON.stringify(grid[i])===JSON.stringify([1,1,1,1,1,1,1,1,1,1])){
-            console.log(i)
+            // console.log(i)
             grid.splice(i,1)
             grid.unshift([0,0,0,0,0,0,0,0,0,0])
             i++
 
         }else {
-            console.log(i,"tidak dihapus")
+            // console.log(i,"tidak dihapus")
             
         }
     }
     
 
-    // const target = [1,1,1,1,1,1,1,1,1,1]
-    // const x = grid.findIndex(arr => 
-    //     arr.length === target.length && arr.every((val, index) => val === target[index])
-    //   );
-    //   if (x!=-1){
-    //     console.log(x)
-    //     grid.splice(x,1)
-    //     grid.unshift([0,0,0,0,0,0,0,0,0,0])
-
-    //   }else {
-    //     return
-    //   }
    
 }
        
 function newTetromino(){
 
-    console.log("new tetromino called")
+    // console.log("new tetromino called")
 const howManyTetrominoes=Object.keys(tetrominoes)
 const tetrominoKeys=Math.floor(Math.random()*howManyTetrominoes.length)  //contain random value from 0 to how many tetrominos i have ....
 tetrominoShape = howManyTetrominoes[tetrominoKeys]
 const setTet = tetrominoes[tetrominoShape][0]
 currentTetromino = setTet;
-currentTetromino=tetrominoes.I[0]
+// currentTetromino=tetrominoes.I[0]
 
 }
 function freezeTetromino(x,y) {
@@ -228,7 +217,7 @@ function moveLeft(params) {
         
         
     }else{
-        console.log("left")
+        // console.log("left")
         placeTetromino(currentTetromino,x-=1,y)
     }
 
@@ -242,7 +231,7 @@ function moveRight(params) {
         
     }else{
         
-        console.log(" right")
+        // console.log(" right")
         placeTetromino(currentTetromino,x+=1,y)
     }
     
@@ -257,7 +246,7 @@ function rotation() {
         );
       }
 
-       console.log(currentTetromino)
+    //    console.log(currentTetromino)
        currentTetromino= rotateClockwise(currentTetromino)
      
       }
@@ -290,7 +279,7 @@ function togel(params) {
 
  
 document.addEventListener("keydown",(e)=>{
-    console.log(e)
+    // console.log(e)
     if (e.key === "ArrowLeft") {
         
         
@@ -315,10 +304,7 @@ document.addEventListener("keydown",(e)=>{
 
      
     }
-    else if (e.key === 'h'){
-        console.log("start")
-       
-    }
+  
 
 
 
@@ -330,6 +316,7 @@ function checkCollision(tetromino,x,y) {
     for (let i = 0; i<tetromino.length;i++ ){
       
         for(let j= 0; j < tetromino[i].length; j++) {
+            if (tetromino[i][j] === 0) continue;
 
             
             const newX = j + x ;
@@ -340,10 +327,10 @@ function checkCollision(tetromino,x,y) {
            //console.log(newY)
         //    console.log(grid[newY][newX])
            
-            if(newX<0 || newX>=cols || newY==rows || grid[newY][newX]===1 ){
-                console.log(true)
-                console.log(newX);
-                console.log(newY);
+            if(newX<0 || newX>=cols || newY==rows ||  grid[newY]?.[newX] === 1 ){
+                // console.log(true)
+                // console.log(newX);
+                // console.log(newY);
                 
                 return true
                 
@@ -357,7 +344,7 @@ function checkCollision(tetromino,x,y) {
             
         }
     }
-  
+    return false
 }
 
 

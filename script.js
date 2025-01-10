@@ -157,6 +157,7 @@ for (let i = 0; i < tetromino.length; i++) {
 }
 let tetrominoShape;
 
+let scoring = 0;
 //check complete
 function checkCompleteRows(){
    
@@ -167,6 +168,8 @@ function checkCompleteRows(){
             grid.splice(i,1)
             grid.unshift([0,0,0,0,0,0,0,0,0,0])
             i++
+            scoring+=10;
+            console.log(scoring)
 
         }else {
             // console.log(i,"tidak dihapus")
@@ -357,9 +360,10 @@ let y = 0;
     clearTetromino(currentTetromino,x,y);
      if ( checkCollision(currentTetromino,x,y)===true && y<=1  ){
 
-        alert("game over")
+        alert(`game over !, your score ${scoring}`)
         
         console.log("game over")
+        
         }
    else if (checkCollision(currentTetromino,x,y)===true) {
         

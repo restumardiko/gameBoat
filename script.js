@@ -242,15 +242,27 @@ function moveRight(params) {
 
     //work by transpose then reverse the tetromino
 function rotation() {
-    clearTetromino(currentTetromino,x,y+1);
-    function rotateClockwise(matrix) {
-        return matrix[0].map((_, colIndex) => 
-          matrix.map(row => row[colIndex]).reverse()
-        );
-      }
+    const cek = currentTetromino.length+x;
+    
+    console.log(cek);
 
-    //    console.log(currentTetromino)
-       currentTetromino= rotateClockwise(currentTetromino)
+    if(cek > grid[0].length){
+        return
+    }else{
+
+        clearTetromino(currentTetromino,x,y+1);
+       // console.log(x,y)
+        function rotateClockwise(matrix) {
+            return matrix[0].map((_, colIndex) => 
+              matrix.map(row => row[colIndex]).reverse()
+            );
+          }
+    
+        //    console.log(currentTetromino)
+           currentTetromino= rotateClockwise(currentTetromino)
+    }
+ 
+       
      
       }
 //pauseGame

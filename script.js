@@ -1,6 +1,9 @@
 window.addEventListener("load",(event)=>{
     startGame()
 })
+const highScore = document.querySelector("#highScore span");
+const score =  document.querySelector('#score span ')
+const level = document.querySelector('#level span ')
 const canvas = document.getElementById('canvas');
 const ctx =  canvas.getContext('2d');
 const rows = 20;
@@ -170,6 +173,7 @@ function checkCompleteRows(){
             i++
             scoring+=10;
             console.log(scoring)
+            score.innerHTML=scoring;
 
         }else {
             // console.log(i,"tidak dihapus")

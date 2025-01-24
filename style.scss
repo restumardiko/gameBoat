@@ -1,7 +1,40 @@
-$dolar:purple;
-h1 {
-color:$dolar;
+header {
+    display: block;
+    width: auto;
+    height: auto;
+    font-size: x-large;
+    text-align: center;
+
 }
+main {
+    display: flex;
+}
+.game-status {
+    display: block;
+    width: 40;
+    
+}
+.canvas-cover {
+    width: 60%;
+    text-align: center;
+    
+    
+}
+canvas {
+   
+
+}
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 
+   
+}
+section {
+    
+    width: auto;
+    padding: 2rem;
+}
+
 *{
     border:black solid 1px;
 }

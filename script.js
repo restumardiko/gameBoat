@@ -11,6 +11,16 @@ const cols = 10;
 const cellSize = 20;
 //establish main grid 
 const grid = Array.from({ length: rows }, () => Array(cols).fill(0));
+if (localStorage.getItem('nilai')!=null){
+
+    highScore.innerHTML=localStorage.getItem('nilai')
+}else{
+    highScore.innerHTML=0
+}
+
+
+//writing local storage 
+
 
 
 function drawGrid() {
@@ -160,7 +170,8 @@ for (let i = 0; i < tetromino.length; i++) {
 }
 let tetrominoShape;
 
-let scoring = 0;
+
+
 //check complete
 function checkCompleteRows(){
    
@@ -365,20 +376,51 @@ function checkCollision(tetromino,x,y) {
     }
     return false
 }
+function highScoreFunction() {
+   const getNilai= JSON.parse(localStorage.getItem('nilai'))
+   console.log(getNilai)
+    if (localStorage.getItem('nilai')==null){
+        localStorage.setItem('nilai',scoring)
+        highScore.innerHTML=scoring
+    }else {
+        console.log(getNilai)
+        if(scoring>=getNilai){
+            console.log( " hokya ini masuk highscore baru ")
+            localStorage.setItem('nilai',scoring)
+            highScore.innerHTML=scoring
+        }else {
+            return
+        }
+    }
+
+}
+
+// if(scoring>=JSON.parse(localStorage.getItem('high score'))){
+//     highScore.innerHTML=localStorage.getItem('high score')
+//     localStorage.setItem("high score",scoring)
+// }else{
+
+// }
 
 
 let x= 3;
 let y = 0;
+let scoring = 0;
+
  function moveTetrominoDown() {
    
     y+=1;
     
     clearTetromino(currentTetromino,x,y);
      if ( checkCollision(currentTetromino,x,y)===true && y<=1  ){
+        highScoreFunction();
 
-        alert(`game over !, your score ${scoring}`)
+        
+
+        
         
         console.log("game over")
+        //set highScore 
         
         }
    else if (checkCollision(currentTetromino,x,y)===true) {

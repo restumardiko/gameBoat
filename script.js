@@ -19,7 +19,6 @@ if (localStorage.getItem('nilai')!=null){
 }
 
 
-//writing local storage 
 
 
 
@@ -144,13 +143,19 @@ function placeTetromino(tetromino, x, y) {
             }
         }
     }
-    drawGrid(); // Opsional: menggambar ulang grid
+    drawGrid(); 
 }
 
 
 function clearTetromino(tetromino,x,y) {
 //only CLEAR PREVIOUS TETROMINO no more
 // console.log("clear function called")
+if (y==0 ){
+    
+    return
+}else {
+
+
 
 for (let i = 0; i < tetromino.length; i++) {
     for (let j = 0; j < tetromino[i].length; j++) {
@@ -160,11 +165,11 @@ for (let i = 0; i < tetromino.length; i++) {
         }
       
         
-        
+    }  
     
     
    }
-  //  drawGrid()
+   // drawGrid()
    
 }
 }
@@ -229,14 +234,15 @@ function moveLeft(params) {
    
    
     
-    clearTetromino(currentTetromino,x,y+1);
+    clearTetromino(currentTetromino,x,y);
     if(checkCollision(currentTetromino,x-1,y)==true){
         
         
         
     }else{
         // console.log("left")
-        placeTetromino(currentTetromino,x-=1,y)
+        placeTetromino(currentTetromino,x-=1,y-1)
+        //cause the "y" is already added by 1 we need to substract y-1 : "
     }
 
     
@@ -244,13 +250,13 @@ function moveLeft(params) {
 }
 function moveRight(params) {
     
-    clearTetromino(currentTetromino,x,y+1);
+    clearTetromino(currentTetromino,x,y);
     if(checkCollision(currentTetromino,x+1,y)==true){
         
     }else{
         
         // console.log(" right")
-        placeTetromino(currentTetromino,x+=1,y)
+        placeTetromino(currentTetromino,x+=1,y-1)
     }
     
 }
@@ -265,7 +271,9 @@ function rotation() {
         return
     }else{
 
-        clearTetromino(currentTetromino,x,y+1);
+
+
+        clearTetromino(currentTetromino,x,y);
        // console.log(x,y)
         function rotateClockwise(matrix) {
             return matrix[0].map((_, colIndex) => 
@@ -275,6 +283,13 @@ function rotation() {
     
         //    console.log(currentTetromino)
            currentTetromino= rotateClockwise(currentTetromino)
+           if (checkCollision(currentTetromino,x,y)){
+            return
+           }else {
+
+               placeTetromino(currentTetromino,x,y-1)
+           }
+         
     }
  
        
@@ -357,7 +372,7 @@ function checkCollision(tetromino,x,y) {
            //console.log(newY)
         //    console.log(grid[newY][newX])
            
-            if(newX<0 || newX>=cols || newY==rows ||  grid[newY]?.[newX] === 1 ){
+            if(newX<0 || newX>=cols || newY=== rows ||  grid[newY]?.[newX] === 1 ){
                 // console.log(true)
                 // console.log(newX);
                 // console.log(newY);
@@ -408,11 +423,13 @@ let y = 0;
 let scoring = 0;
 
  function moveTetrominoDown() {
+    
+    console.log(y)
    
-    y+=1;
+    // y+=1;
     
     clearTetromino(currentTetromino,x,y);
-     if ( checkCollision(currentTetromino,x,y)===true && y<=1  ){
+     if ( checkCollision(currentTetromino,x,y)===true && grid[0][3]==1  ){
         highScoreFunction();
 
         
@@ -420,6 +437,7 @@ let scoring = 0;
         
         
         console.log("game over")
+        pauseGame()
         //set highScore 
         
         }
@@ -444,6 +462,7 @@ let scoring = 0;
         
         
         placeTetromino(currentTetromino,x,y)
+        y+=1
     
     }
     

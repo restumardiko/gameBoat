@@ -150,7 +150,7 @@ function placeTetromino(tetromino, x, y) {
 function clearTetromino(tetromino,x,y) {
 //only CLEAR PREVIOUS TETROMINO no more
 // console.log("clear function called")
-if (y==0 ){
+if (y<=0 ){
     
     return
 }else {
@@ -235,7 +235,7 @@ function moveLeft(params) {
    
     
     clearTetromino(currentTetromino,x,y);
-    if(checkCollision(currentTetromino,x-1,y)==true){
+    if(checkCollision(currentTetromino,x-1,y)==true || y === 0){
         
         
         
@@ -251,7 +251,7 @@ function moveLeft(params) {
 function moveRight(params) {
     
     clearTetromino(currentTetromino,x,y);
-    if(checkCollision(currentTetromino,x+1,y)==true){
+    if(checkCollision(currentTetromino,x+1,y)==true || y==0){
         
     }else{
         
@@ -263,17 +263,17 @@ function moveRight(params) {
 
     //work by transpose then reverse the tetromino
 function rotation() {
+    clearTetromino(currentTetromino,x,y);
     const cek = currentTetromino.length+x;
     
-    console.log(cek);
+    //console.log(cek);
 
-    if(cek > grid[0].length){
+    if(cek > grid[0].length || y === 0){
         return
-    }else{
+    }else{ 
 
 
 
-        clearTetromino(currentTetromino,x,y);
        // console.log(x,y)
         function rotateClockwise(matrix) {
             return matrix[0].map((_, colIndex) => 
@@ -324,6 +324,7 @@ function togel(params) {
 
  
 document.addEventListener("keydown",(e)=>{
+
     // console.log(e)
     if (e.key === "ArrowLeft") {
         
@@ -340,7 +341,6 @@ document.addEventListener("keydown",(e)=>{
         moveDown()
     }
     else if ( e.key === "ArrowUp"){
-        clearTetromino(currentTetromino,x,y);
 
         rotation()    }
     else if ( e.key === ' '){
@@ -371,9 +371,13 @@ function checkCollision(tetromino,x,y) {
            
            //console.log(newY)
         //    console.log(grid[newY][newX])
+        console.log(newX<0)
+        console.log(newX>=cols)
+        console.log(newY===rows)
+        console.log(grid[newY]?.[newX] === 1)
            
             if(newX<0 || newX>=cols || newY=== rows ||  grid[newY]?.[newX] === 1 ){
-                // console.log(true)
+                 console.log("check collision true")
                 // console.log(newX);
                 // console.log(newY);
                 
@@ -424,7 +428,7 @@ let scoring = 0;
 
  function moveTetrominoDown() {
     
-    console.log(y)
+    // console.log(y)
    
     // y+=1;
     

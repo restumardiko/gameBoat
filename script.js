@@ -1,6 +1,8 @@
 window.addEventListener("load",(event)=>{
     startGame()
 })
+const paus = document.getElementById('paus')
+const reset = document.getElementById('restart')
 const highScore = document.querySelector("#highScore span");
 const score =  document.querySelector('#score span ')
 const level = document.querySelector('#level span ')
@@ -9,6 +11,18 @@ const ctx =  canvas.getContext('2d');
 const rows = 20;
 const cols = 10;
 const cellSize = 20;
+
+  
+
+    
+
+// function reseT(){
+//     console.log('reset')
+// }
+// // 
+// reset.addEventListener('click',reseT)
+
+
 //establish main grid 
 const grid = Array.from({ length: rows }, () => Array(cols).fill(0));
 if (localStorage.getItem('nilai')!=null){
@@ -189,7 +203,22 @@ function checkCompleteRows(){
             i++
             scoring+=10;
             console.log(scoring)
+            
             score.innerHTML=scoring;
+            if (scoring>=200){
+                timeInterval=100;
+                level.innerHTML=4;
+            }else if (scoring>=150){
+                timeInterval=200;
+                level.innerHTML=3;
+            }else if (scoring>=100){
+                timeInterval=500;
+                level.innerHTML=2;
+            }
+            clearInterval(gameInterval); // Stops the interval
+            gameInterval = null;
+            startGame()
+            
 
         }else {
             // console.log(i,"tidak dihapus")
@@ -295,8 +324,11 @@ function rotation() {
        
      
       }
+let timeInterval=1000;
 //pauseGame
 function pauseGame(){
+    
+    paus.style.display='block'
     console.log("pause")
     if (gameInterval) {
         clearInterval(gameInterval); // Stops the interval
@@ -306,14 +338,17 @@ function pauseGame(){
 }
 function startGame() {
     console.log("start")
-   gameInterval= setInterval(moveTetrominoDown,1000);
+      paus.style.display='none'
+   gameInterval= setInterval(moveTetrominoDown,timeInterval);
 }
 //togel function
 function togel(params) {
     isPaused=!isPaused
     if(isPaused){
         pauseGame()
+        
     }else{
+      
         startGame()
     }
     
@@ -442,6 +477,7 @@ let scoring = 0;
         
         console.log("game over")
         pauseGame()
+        paus.innerHTML="GAME OVER"
         //set highScore 
         
         }

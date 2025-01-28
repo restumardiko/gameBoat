@@ -6,6 +6,15 @@ header {
   text-align: center;
 }
 
+#paus {
+  color: black;
+  height: 3rem;
+  position: absolute;
+  left: 25%;
+  top: 30%;
+  display: none;
+}
+
 main {
   display: flex;
 }
@@ -32,4 +41,4 @@ section {
 
 * {
   border: black solid 1px;
-}/*# sourceMappingURL=style.css.map */
+} /*# sourceMappingURL=style.css.map */

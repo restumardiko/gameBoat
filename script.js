@@ -2,7 +2,7 @@ window.addEventListener("load",(event)=>{
     startGame()
 })
 const paus = document.getElementById('paus')
-const reset = document.getElementById('restart')
+const restart = document.getElementById('restart')
 const highScore = document.querySelector("#highScore span");
 const score =  document.querySelector('#score span ')
 const level = document.querySelector('#level span ')
@@ -16,11 +16,12 @@ const cellSize = 20;
 
     
 
-// function reseT(){
-//     console.log('reset')
-// }
-// // 
-// reset.addEventListener('click',reseT)
+function rest(){
+  window.location.reload()
+
+}
+// 
+restart.addEventListener('click',rest)
 
 
 //establish main grid 
@@ -264,11 +265,11 @@ function moveLeft(params) {
    
     
     clearTetromino(currentTetromino,x,y);
-    if(checkCollision(currentTetromino,x-1,y)==true || y === 0){
+    if(checkCollision(currentTetromino,x-1,y-1)===true || y === 0){
         
+        return 
         
-        
-    }else{
+    }else if (checkCollision(currentTetromino,x-1,y-1)===false){
         // console.log("left")
         placeTetromino(currentTetromino,x-=1,y-1)
         //cause the "y" is already added by 1 we need to substract y-1 : "
@@ -280,7 +281,7 @@ function moveLeft(params) {
 function moveRight(params) {
     
     clearTetromino(currentTetromino,x,y);
-    if(checkCollision(currentTetromino,x+1,y)==true || y==0){
+    if(checkCollision(currentTetromino,x+1,y-1)==true || y==0){
         
     }else{
         
@@ -402,14 +403,14 @@ function checkCollision(tetromino,x,y) {
             const newX = j + x ;
             const newY = i + y ;
             
-           //console.log(newY)
+        //    //console.log(newY)
            
-           //console.log(newY)
-        //    console.log(grid[newY][newX])
-        console.log(newX<0)
-        console.log(newX>=cols)
-        console.log(newY===rows)
-        console.log(grid[newY]?.[newX] === 1)
+        //    //console.log(newY)
+        // //    console.log(grid[newY][newX])
+        // console.log(newX<0)
+        // console.log(newX>=cols)
+        // console.log(newY===rows)
+        // console.log(grid[newY][newX] === 1)
            
             if(newX<0 || newX>=cols || newY=== rows ||  grid[newY]?.[newX] === 1 ){
                  console.log("check collision true")
@@ -478,6 +479,7 @@ let scoring = 0;
         console.log("game over")
         pauseGame()
         paus.innerHTML="GAME OVER"
+      
         //set highScore 
         
         }
@@ -503,9 +505,13 @@ let scoring = 0;
         
         placeTetromino(currentTetromino,x,y)
         y+=1
+        console.log("sudah di tambahkan y+1")
     
     }
     
+ }
+ function resetGame(){
+    console.log('reset')
  }
  
  let gameInterval = null; 

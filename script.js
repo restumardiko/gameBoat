@@ -1,6 +1,7 @@
 window.addEventListener("load",(event)=>{
     startGame()
 })
+const reset = document.getElementById('reset')
 const paus = document.getElementById('paus')
 const restart = document.getElementById('restart')
 const highScore = document.querySelector("#highScore span");
@@ -13,8 +14,8 @@ const cols = 10;
 const cellSize = 20;
 
   
-
-    
+reset.addEventListener('click',resett)
+ 
 
 function rest(){
   window.location.reload()
@@ -449,6 +450,13 @@ function highScoreFunction() {
     }
 
 }
+//reset highscore 
+function resett(){
+    console.log('reset')
+    localStorage.removeItem('nilai')
+    highScore.innerHTML=0;
+}
+   
 
 // if(scoring>=JSON.parse(localStorage.getItem('high score'))){
 //     highScore.innerHTML=localStorage.getItem('high score')

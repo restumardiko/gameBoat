@@ -1,9 +1,14 @@
 window.addEventListener("load",(event)=>{
     startGame()
 })
-const reset = document.getElementById('reset')
-const paus = document.getElementById('paus')
-const restart = document.getElementById('restart')
+const arrowDown = document.getElementById('onDown');
+const arrowUp = document.getElementById('onUp');
+const arrowLeft= document.getElementById('onLeft');
+const arrowRight = document.getElementById('onRight');
+const space = document.getElementById('onSpace');
+const reset = document.getElementById('reset');
+const paus = document.getElementById('paus');
+const restart = document.getElementById('restart');
 const highScore = document.querySelector("#highScore span");
 const score =  document.querySelector('#score span ')
 const level = document.querySelector('#level span ')
@@ -15,6 +20,43 @@ const cellSize = 20;
 
   
 reset.addEventListener('click',resett)
+arrowDown.addEventListener('click',()=>{
+    if(!isPaused){
+
+        console.log('down')
+        moveDown()
+    }
+   
+    
+});
+arrowUp.addEventListener('click',()=>{
+   if(!isPaused){
+
+       console.log('up')
+       rotation()
+
+   }
+    
+})
+arrowLeft.addEventListener('click',()=>{
+    if(!isPaused){
+
+        console.log('left')
+        moveLeft()
+    }
+
+    
+})
+arrowRight.addEventListener('click',()=>{
+    if(!isPaused){
+
+        console.log('right')
+        moveRight()
+    }
+    
+    
+});
+space.addEventListener('click',togel)
  
 
 function rest(){
@@ -363,21 +405,21 @@ function togel(params) {
 document.addEventListener("keydown",(e)=>{
 
     // console.log(e)
-    if (e.key === "ArrowLeft") {
+    if (e.key === "ArrowLeft" && isPaused === false) {
         
         
         moveLeft()
         
     }
-    else if (e.key === "ArrowRight") {
+    else if (e.key === "ArrowRight" && isPaused === false) {
 
         moveRight()
         
     } 
-    else if (e.key === "ArrowDown"){
+    else if (e.key === "ArrowDown" && isPaused === false){
         moveDown()
     }
-    else if ( e.key === "ArrowUp"){
+    else if ( e.key === "ArrowUp" && isPaused === false ){
 
         rotation()    }
     else if ( e.key === ' '){
@@ -486,7 +528,7 @@ let scoring = 0;
         
         console.log("game over")
         pauseGame()
-        paus.innerHTML="GAME OVER"
+        paus.innerHTML="GAME<br> OVER"
       
         //set highScore 
         

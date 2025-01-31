@@ -8,10 +8,12 @@ header {
 
 #paus {
   color: black;
-  height: 3rem;
+  border: black solid 2px;
+  background-color: none;
+  height: auto;
   position: absolute;
-  left: 25%;
-  top: 30%;
+  left: 25.5%;
+  top: 25%;
   display: none;
 }
 
@@ -39,6 +41,6 @@ section {
   padding: 2rem;
 }
 
-* {
+* * {
   border: black solid 1px;
-} /*# sourceMappingURL=style.css.map */
+}

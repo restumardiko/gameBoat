@@ -16,7 +16,7 @@ const canvas = document.getElementById('canvas');
 const ctx =  canvas.getContext('2d');
 const rows = 20;
 const cols = 10;
-const cellSize = 20;
+const cellSize = 25;
 
   
 reset.addEventListener('click',resett)

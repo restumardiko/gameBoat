@@ -3,37 +3,38 @@ header {
   width: auto;
   height: auto;
   font-size: x-large;
-  text-align: center;
+  text-align: start;
 }
 
 #paus {
-  color: black;
-  border: black solid 2px;
+  color: red;
+  border: red solid 2px;
   background-color: none;
   height: auto;
   position: absolute;
-  left: 25.5%;
-  top: 25%;
+  left: 5%;
+  top: 36%;
   display: none;
 }
 
 main {
   display: flex;
+  flex-direction: row;
+  gap: 2rem;
 }
 
 .game-status {
   display: block;
-  width: 40;
+  width: 14rem;
 }
 
 .canvas-cover {
-  width: 60%;
-  text-align: center;
+  width: auto;
+  /* text-align: center; */
 }
-
-.container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+#canvas {
+  border: black solid 2px;
+  width: auto;
 }
 
 section {
@@ -42,5 +43,16 @@ section {
 }
 
 * * {
-  border: black solid 1px;
+  outline: limegreen solid 1px;
+}
+@media (max-width: 460px) {
+  main {
+    display: flex;
+    flex-direction: column;
+  }
+  #paus {
+    left: 19%;
+    top: 36%;
+    display: none;
+  }
 }

@@ -84,7 +84,7 @@ function drawGrid() {
     for(let i=0;i<rows;i++){
         for(let j=0;j<cols;j++){
             if(grid[i][j]!=0){
-            ctx.fillStyle="orange"
+            ctx.fillStyle="violet"
            ctx.fillRect(j*cellSize,i*cellSize,cellSize,cellSize);
            ctx.strokeRect(j*cellSize,i*cellSize,cellSize,cellSize)
             }
@@ -184,15 +184,15 @@ const tetrominoes = {
 }
 
 
-//const indexNumberOnTetrominoShape =Math.floor(Math.random()*tetrominoes.length)
+
 let currentTetromino = tetrominoes.L[0]
 function placeTetromino(tetromino, x, y) {
     for (let i = 0; i < tetromino.length; i++) {
         for (let j = 0; j < tetromino[i].length; j++) {
-            // Abaikan sel dengan nilai 0
+     
             if (tetromino[i][j] === 0) continue;
 
-            // Pastikan tetromino tidak menimpa nilai di grid yang sudah terisi
+           
             const gridX = x + j;
             const gridY = y + i;
 
@@ -227,7 +227,7 @@ for (let i = 0; i < tetromino.length; i++) {
     
     
    }
-   // drawGrid()
+
    
 }
 }

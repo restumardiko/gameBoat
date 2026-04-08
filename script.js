@@ -18,6 +18,28 @@ const rows = 20;
 const cols = 10;
 const cellSize = 25;
 
+function startGame() {
+  paus.style.display = "none";
+  gameInterval = setInterval(moveTetrominoDown, timeInterval);
+}
+
+function pauseGame() {
+  paus.style.display = "block";
+  console.log("pause");
+  if (gameInterval) {
+    clearInterval(gameInterval);
+    gameInterval = null;
+  }
+}
+function togel(params) {
+  isPaused = !isPaused;
+  if (isPaused) {
+    pauseGame();
+  } else {
+    startGame();
+  }
+}
+
 reset.addEventListener("click", resett);
 arrowDown.addEventListener("click", () => {
   if (!isPaused) {
@@ -270,29 +292,6 @@ function rotation() {
 }
 let timeInterval = 1000;
 
-function pauseGame() {
-  paus.style.display = "block";
-  console.log("pause");
-  if (gameInterval) {
-    clearInterval(gameInterval);
-    gameInterval = null;
-  }
-}
-function startGame() {
-  console.log("start");
-  paus.style.display = "none";
-  gameInterval = setInterval(moveTetrominoDown, timeInterval);
-}
-
-function togel(params) {
-  isPaused = !isPaused;
-  if (isPaused) {
-    pauseGame();
-  } else {
-    startGame();
-  }
-}
-
 document.addEventListener("keydown", (e) => {
   // console.log(e)
   if (e.key === "ArrowLeft" && isPaused === false) {
@@ -333,12 +332,11 @@ function checkCollision(tetromino, x, y) {
 }
 function highScoreFunction() {
   const getNilai = JSON.parse(localStorage.getItem("nilai"));
-  console.log(getNilai);
+
   if (localStorage.getItem("nilai") == null) {
     localStorage.setItem("nilai", scoring);
     highScore.innerHTML = scoring;
   } else {
-    console.log(getNilai);
     if (scoring >= getNilai) {
       console.log(" hokya ini masuk highscore baru ");
       localStorage.setItem("nilai", scoring);
